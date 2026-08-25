@@ -1,0 +1,9 @@
+class Solution {
+    public int missingMultiple(int[] nums, int k) {
+        Set<Integer> a=new HashSet<>();
+        for(int num:nums)a.add(num);
+        int b=k;
+        while(a.contains(b))b+=k;
+        return b;
+    }
+}
