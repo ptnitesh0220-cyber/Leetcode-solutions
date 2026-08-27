@@ -1,0 +1,22 @@
+class Solution {
+    public String lexGreaterPermutation(String s, String t) {
+        int[] c=new int[26];
+        for(char x:s.toCharArray()) c[x-'a']++;
+        for(int i=t.length()-1;i>=0;i--){
+            int[] r=c.clone();
+            boolean ok=true;
+            for(int j=0;j<i;j++)
+                if(--r[t.charAt(j)-'a']<0){ok=false;break;}
+            if(!ok) continue;
+            for(int x=t.charAt(i)-'a'+1;x<26;x++)
+                if(r[x]>0){
+                    StringBuilder a=new StringBuilder(t.substring(0,i));
+                    a.append((char)('a'+x)); r[x]--;
+                    for(int j=0;j<26;j++)
+                        while(r[j]-->0) a.append((char)('a'+j));
+                    return a.toString();
+                }
+        }
+        return "";
+    }
+}
