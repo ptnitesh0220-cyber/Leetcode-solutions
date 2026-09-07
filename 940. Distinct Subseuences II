@@ -1,0 +1,13 @@
+class Solution {
+    public int distinctSubseqII(String s) {
+        long mod=1000000007,dp=1;
+        long[] last=new long[26];
+        for(char c:s.toCharArray()) {
+            int i=c-'a';
+            long old=dp;
+            dp=(2*dp-last[i]+mod)%mod;
+            last[i]=old;
+        }
+        return (int)((dp-1+mod)%mod);
+    }
+}
