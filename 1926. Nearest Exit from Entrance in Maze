@@ -1,0 +1,22 @@
+class Solution {
+    public int nearestExit(char[][] maze, int[] e) {
+        int R=maze.length,C=maze[0].length;
+        Queue<int[]> q=new LinkedList<>();
+        q.add(new int[]{e[0],e[1],0});
+        maze[e[0]][e[1]]='+';
+        int[] diff={0,1,0,-1,0};
+        while(!q.isEmpty()){
+            int[] a=q.poll();
+            int row=a[0],col=a[1],step=a[2];
+            for(int i=0;i<4;i++){
+                int ar=row+diff[i],ac=col+diff[i+1];
+                if(ar>=0 && ar<R && ac>=0 && ac<C && maze[ar][ac]=='.'){
+                    if(ar==0 || ar==R-1 || ac==0 || ac==C-1)return step+1;
+                    maze[ar][ac]='+';
+                    q.add(new int[]{ar,ac,step+1});
+                }
+            }
+        }
+        return -1;
+    }
+}
