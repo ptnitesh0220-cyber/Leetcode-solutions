@@ -1,0 +1,16 @@
+class Solution {
+    public long[] resultArray(int[] a, int k) {
+        long[] ans=new long[k], dp=new long[k];
+        for(int x:a){
+            int v=x%k;
+            long[] b=new long[k];
+            b[v]=1;
+            for(int i=0;i<k;i++)
+                b[(int)(1L*i*v%k)]+=dp[i];
+            for(int i=0;i<k;i++)
+                ans[i]+=b[i];
+            dp=b;
+        }
+        return ans;
+    }
+}
