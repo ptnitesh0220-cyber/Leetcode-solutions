@@ -1,0 +1,16 @@
+class Solution {
+    public String reverseParentheses(String s) {
+        StringBuilder st=new StringBuilder();
+        for(char c:s.toCharArray()){
+            if(c==')'){
+                int i=st.lastIndexOf("(");
+                String x=st.substring(i+1);
+                st.delete(i,st.length());
+                st.append(new StringBuilder(x).reverse());
+            }
+            else
+                st.append(c);
+        }
+        return st.toString().replace("(","");
+    }
+}
