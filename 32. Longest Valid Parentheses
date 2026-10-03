@@ -1,0 +1,19 @@
+class Solution {
+    public int longestValidParentheses(String s) {
+        int l=0,r=0,ans=0;
+        for(char c:s.toCharArray()){
+            if(c=='(') l++;
+            else r++;
+            if(l==r) ans=Math.max(ans,2*r);
+            if(r>l) l=r=0;
+        }
+        l=r=0;
+        for(int i=s.length()-1;i>=0;i--){
+            if(s.charAt(i)==')') r++;
+            else l++;
+            if(l==r) ans=Math.max(ans,2*l);
+            if(l>r) l=r=0;
+        }
+        return ans;
+    }
+}
