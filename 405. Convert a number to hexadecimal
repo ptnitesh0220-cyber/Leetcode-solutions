@@ -1,0 +1,12 @@
+class Solution {
+    public String toHex(int num) {
+        if(num==0) return "0";
+        String s="";
+        char a[]="0123456789abcdef".toCharArray();
+        while(num!=0) {
+            s=a[num&15]+s;
+            num=num>>>4;
+        }
+        return s;
+    }
+}
