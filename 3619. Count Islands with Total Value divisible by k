@@ -1,0 +1,26 @@
+class Solution {
+    int[] diff={0,1,0,-1,0};
+    long sum=0;
+    public void dfs(int[][] grid,int i,int j,int R,int C){
+        if(i<0||i>=R||j<0||j>=C||grid[i][j]==0)return;
+        sum+=grid[i][j];
+        grid[i][j]=0;
+        for(int k=0;k<4;k++){
+            int ar=i+diff[k],ac=j+diff[k+1];
+            dfs(grid,ar,ac,R,C);
+        }
+    }
+    public int countIslands(int[][] grid,int k) {
+        int R=grid.length,C=grid[0].length,c=0;
+        for(int i=0;i<R;i++){
+            for(int j=0;j<C;j++){
+                if(grid[i][j]>0){
+                    sum=0;
+                    dfs(grid,i,j,R,C);
+                    if(sum%k==0)c++;
+                }
+            }
+        }
+        return c;
+    }
+}
