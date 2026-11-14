@@ -1,0 +1,28 @@
+class Solution {
+    PriorityQueue<Integer> max,min;
+    public double median(int[] ans){
+        max=new PriorityQueue<>(Collections.reverseOrder());
+        min=new PriorityQueue<>();
+        for(int x:ans){
+            max.add(x);
+            min.add(max.poll());
+            if(max.size()<min.size())
+            max.add(min.poll());
+        }
+        if(max.size()>min.size())return max.peek();
+        return (max.peek()+min.peek())/2.0;
+    }
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int[] ans=new int[nums1.length+nums2.length];
+        int n=0;
+        for(int i=0;i<nums1.length;i++){
+            ans[n]=nums1[i];
+            n++;
+        }
+        for(int i=0;i<nums2.length;i++){
+            ans[n]=nums2[i];
+            n++;
+        }
+        return median(ans);
+    }
+}
