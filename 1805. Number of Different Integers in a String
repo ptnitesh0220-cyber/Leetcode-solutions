@@ -1,0 +1,23 @@
+class Solution {
+    public int numDifferentIntegers(String word) {
+        int c=0;
+        String s="";
+        ArrayList<String> ar=new ArrayList<>();
+        for(int i=0;i<word.length();i++){
+            char a=word.charAt(i);
+            if(a>='0' && a<='9')s+=a;
+            else{
+                if(!s.isEmpty()){
+                    s=s.replaceFirst("^0+(?!$)","");
+                    if(!ar.contains(s))ar.add(s);
+                    s="";
+                }
+            }
+        }
+        if(!s.isEmpty()){
+            s=s.replaceFirst("^0+(?!$)","");
+            if(!ar.contains(s))ar.add(s);
+        }
+            return ar.size();
+    }
+}
